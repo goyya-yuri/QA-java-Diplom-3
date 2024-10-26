@@ -1,5 +1,6 @@
 package stellar;
 
+import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.*;
@@ -23,7 +24,7 @@ public class NavigationTest {
     public static DriverFactory factory = new DriverFactory();
 
     @Before
-    @DisplayName("Создание пользователя")
+    @Step("Создание пользователя")
     public void createUser(){
         user = User.random();
         ValidatableResponse response = client.create(user);
@@ -38,7 +39,7 @@ public class NavigationTest {
     }
 
     @After
-    @DisplayName("Удаление пользователя")
+    @Step("Удаление пользователя")
     public void removeUser(){
         if(accessToken == null) return;
         ValidatableResponse deleteResponse = client.delete(accessToken);
@@ -46,6 +47,7 @@ public class NavigationTest {
     }
 
     @Test
+    @DisplayName("Переход в личный кабинет")
     public void toCabinetTest(){
         new MainPage(factory.getDriver())
                 .clickCabinetButton();
@@ -54,7 +56,8 @@ public class NavigationTest {
     }
 
     @Test
-    public void toConstructorPageTest(){
+    @DisplayName("Переход из личного кабинета в конструктор")
+    public void toConstructorPageFromCabinetTest(){
         new MainPage(factory.getDriver())
                 .clickCabinetButton();
         new CabinetPage(factory.getDriver())
@@ -64,6 +67,7 @@ public class NavigationTest {
     }
 
     @Test
+    @DisplayName("Выход из аккаунта")
     public void exitFromAccountTest(){
         new MainPage(factory.getDriver())
                 .clickCabinetButton();
@@ -74,6 +78,7 @@ public class NavigationTest {
     }
 
     @Test
+    @DisplayName("Выбор категорий ингредиентов")
     public void switchTabsTest(){
         new MainPage(factory.getDriver())
                 .swichTab(1)

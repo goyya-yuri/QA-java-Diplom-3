@@ -1,5 +1,6 @@
 package stellar.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,21 +23,25 @@ public class LoginPage {
 
     By loginTitle = By.xpath("//h2[contains(text(),'Вход')]");
 
+    @Step("Ввод почты в форму авторизации")
     public LoginPage enterEmail(String email) {
         driver.findElement(emailInput).sendKeys(email);
         return this;
     }
 
+    @Step("Ввод пароля в форму авторизации")
     public LoginPage enterPassword(String password) {
         driver.findElement(passwordInput).sendKeys(password);
         return this;
     }
 
+    @Step("Нажатие на кнопку авторизации")
     public LoginPage clickOnLoginButton() {
         driver.findElement(loginButton).click();
         return this;
     }
 
+    @Step("Проверка открытия страницы авторизации")
     public LoginPage checkLoginLoaded() {
         new WebDriverWait(driver, Duration.ofSeconds(Config.EXPLICIT_WAIT))
                 .until(ExpectedConditions.presenceOfElementLocated(loginTitle));

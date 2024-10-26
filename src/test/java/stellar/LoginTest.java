@@ -1,5 +1,6 @@
 package stellar;
 
+import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.*;
@@ -23,7 +24,7 @@ public class LoginTest {
     public static DriverFactory factory = new DriverFactory();
 
     @Before
-    @DisplayName("Создание пользователя")
+    @Step("Создание пользователя")
     public void createUser(){
         user = User.random();
         ValidatableResponse response = client.create(user);
@@ -31,7 +32,7 @@ public class LoginTest {
     }
 
     @After
-    @DisplayName("Удаление пользователя")
+    @Step("Удаление пользователя")
     public void removeUser(){
         if(accessToken == null) return;
         ValidatableResponse deleteResponse = client.delete(accessToken);

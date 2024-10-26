@@ -1,5 +1,6 @@
 package stellar;
 
+import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
@@ -23,7 +24,7 @@ public class RegisterTest {
     public static DriverFactory factory = new DriverFactory();
 
     @After
-    @DisplayName("Удаление пользователя")
+    @Step("Удаление пользователя")
     public void removeUser(){
         if(accessToken == null) return;
         ValidatableResponse deleteResponse = client.delete(accessToken);
